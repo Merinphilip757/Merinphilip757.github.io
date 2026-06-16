@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Merin Anna Philip - AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0d10;
+    --bg-soft: #111418;
+    --card: #15181d;
+    --line: #242931;
+    --text: #e8eaed;
+    --muted: #9aa3ad;
+    --accent: #7dd3c0;
+    --accent-soft: rgba(125,211,192,0.12);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  ::selection{ background:var(--accent); color:#0b0d10; }
+
+  /* ===== NAV ===== */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:24px 48px;
+    backdrop-filter:blur(12px);
+    background:rgba(11,13,16,0.7);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s;
+  }
+  nav.scrolled{ border-bottom-color:var(--line); }
+
+  .logo{
+    font-family:var(--serif);
+    font-size:1.25rem;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  .logo .dot{ color:var(--accent); }
+
+  .nav-links{
+    display:flex; gap:36px;
+    font-size:0.9rem;
+    color:var(--muted);
+  }
+  .nav-links a{ position:relative; transition:color .2s; }
+  .nav-links a:hover{ color:var(--text); }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:-6px;
+    width:0; height:1px; background:var(--accent);
+    transition:width .25s;
+  }
+  .nav-links a:hover::after{ width:100%; }
+
+  .availability{
+    font-size:0.78rem;
+    color:var(--accent);
+    border:1px solid var(--accent-soft);
+    background:var(--accent-soft);
+    padding:6px 14px;
+    border-radius:100px;
+    display:flex; align-items:center; gap:8px;
+    font-family:var(--mono);
+    letter-spacing:0.02em;
+  }
+  .availability .pulse{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--accent);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(125,211,192,0.6); }
+    70%{ box-shadow:0 0 0 8px rgba(125,211,192,0); }
+    100%{ box-shadow:0 0 0 0 rgba(125,211,192,0); }
+  }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .availability span.label{ display:none; }
+    nav{ padding:18px 24px; }
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:160px 48px 80px;
+    max-width:1200px; margin:0 auto;
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:60px;
+    align-items:center;
+  }
+
+  .hero-visual{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:420px;
+    opacity:0;
+    animation:fadeUp .9s ease forwards;
+    animation-delay:.5s;
+  }
+
+  .avatar-frame{
+    position:relative;
+    width:280px; height:340px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:14px;
+    transform:rotate(-2deg);
+    box-shadow:0 24px 60px -20px rgba(0,0,0,0.6);
+  }
+  .avatar-frame::before{
+    content:'';
+    position:absolute;
+    top:-14px; right:36px;
+    width:60px; height:24px;
+    background:rgba(125,211,192,0.35);
+    transform:rotate(4deg);
+    border-radius:2px;
+  }
+  .avatar-inner{
+    width:100%; height:100%;
+    border-radius:3px;
+    overflow:hidden;
+    position:relative;
+  }
+  .avatar-inner img{
+    width:100%; height:100%;
+    object-fit:cover;
+  }
+  .avatar-inner svg{ width:62%; height:62%; }
+  .avatar-caption{
+    margin-top:14px;
+    text-align:center;
+    font-family:var(--mono);
+    font-size:0.75rem;
+    color:var(--muted);
+    letter-spacing:0.05em;
+  }
+
+  /* floating tags */
+  .hand-tag{
+    position:absolute;
+    font-family:var(--sans);
+    font-size:0.8rem;
+    font-weight:500;
+    color:var(--accent);
+    background:var(--accent-soft);
+    border:1px solid rgba(125,211,192,0.2);
+    padding:5px 12px;
+    border-radius:100px;
+    letter-spacing:0.02em;
+    white-space:nowrap;
+  }
+  .tag-1{ top:6%;  left:-4%;  transform:rotate(-3deg); }
+  .tag-2{ top:2%;  right:-8%; transform:rotate(2deg); }
+  .tag-3{ top:46%; left:-14%; transform:rotate(-2deg); }
+  .tag-4{ top:42%; right:-16%; transform:rotate(3deg); }
+  .tag-5{ bottom:8%; left:-2%; transform:rotate(-2deg); }
+  .tag-6{ bottom:4%; right:-6%; transform:rotate(2deg); }
+
+  @media (max-width:1000px){
+    .hero-grid{ grid-template-columns:1fr; gap:48px; }
+    .hero-visual{ order:-1; min-height:300px; }
+    .hand-tag{ display:none; }
+    .avatar-frame{ width:220px; height:270px; }
+  }
+
+  .hero-eyebrow{
+    font-family:var(--mono);
+    font-size:0.85rem;
+    color:var(--accent);
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    margin-bottom:24px;
+    opacity:0;
+    animation:fadeUp .8s ease forwards;
+    animation-delay:.1s;
+  }
+
+  .hero h1{
+    font-family:var(--serif);
+    font-size:clamp(2.6rem, 7vw, 5.5rem);
+    font-weight:600;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    max-width:14ch;
+    opacity:0;
+    animation:fadeUp .8s ease forwards;
+    animation-delay:.25s;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--accent);
+    font-weight:400;
+  }
+
+  /* Professional serif name — no animation, clean */
+  .hero-name{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:300;
+    color:var(--accent);
+    letter-spacing:-0.01em;
+  }
+
+  .hero-sub{
+    margin-top:28px;
+    font-size:1.15rem;
+    color:var(--muted);
+    max-width:46ch;
+    opacity:0;
+    animation:fadeUp .8s ease forwards;
+    animation-delay:.4s;
+  }
+
+  .hero-meta{
+    margin-top:16px;
+    font-size:0.92rem;
+    color:var(--muted);
+    font-family:var(--mono);
+    max-width:60ch;
+    opacity:0;
+    animation:fadeUp .8s ease forwards;
+    animation-delay:.5s;
+  }
+  .hero-meta .sep{ color:var(--line); margin:0 8px; }
+
+  .hero-cta{
+    margin-top:44px;
+    display:flex; gap:16px; flex-wrap:wrap;
+    opacity:0;
+    animation:fadeUp .8s ease forwards;
+    animation-delay:.6s;
+  }
+
+  .btn{
+    font-family:var(--sans);
+    font-size:0.92rem;
+    font-weight:600;
+    padding:14px 28px;
+    border-radius:6px;
+    border:1px solid var(--line);
+    cursor:pointer;
+    transition:all .25s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:#0b0d10;
+    border-color:var(--accent);
+  }
+  .btn-primary:hover{
+    background:transparent;
+    color:var(--accent);
+  }
+  .btn-ghost{
+    background:transparent;
+    color:var(--text);
+  }
+  .btn-ghost:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+  }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform:translateY(18px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  /* ===== SECTION SHARED ===== */
+  section{
+    padding:120px 48px;
+    max-width:1200px;
+    margin:0 auto;
+  }
+  .section-eyebrow{
+    font-family:var(--mono);
+    font-size:0.8rem;
+    color:var(--accent);
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .section-title{
+    font-family:var(--serif);
+    font-size:clamp(2rem, 4.5vw, 3.4rem);
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin-bottom:64px;
+    max-width:18ch;
+  }
+  .section-title em{ font-style:italic; color:var(--accent); font-weight:400; }
+
+  @media (max-width:860px){
+    section{ padding:80px 24px; }
+  }
+
+  /* ===== ABOUT ===== */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:64px;
+    align-items:start;
+  }
+  .about-text p{
+    color:var(--muted);
+    font-size:1.05rem;
+    margin-bottom:20px;
+    max-width:60ch;
+  }
+  .about-text strong{ color:var(--text); font-weight:600; }
+
+  .edu-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:28px;
+    margin-bottom:20px;
+    transition:border-color .25s, transform .25s;
+  }
+  .edu-card:hover{
+    border-color:var(--accent);
+    transform:translateY(-3px);
+  }
+  .edu-card .degree{
+    font-family:var(--serif);
+    font-size:1.25rem;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .edu-card .school{ color:var(--accent); font-size:0.92rem; margin-bottom:10px; }
+  .edu-card .meta{
+    font-family:var(--mono);
+    font-size:0.8rem;
+    color:var(--muted);
+    display:flex; justify-content:space-between;
+  }
+
+  .cert-list{
+    margin-top:8px;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .cert-item{
+    font-size:0.88rem;
+    color:var(--muted);
+    padding:12px 16px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:var(--card);
+    display:flex; gap:10px; align-items:baseline;
+  }
+  .cert-item .cert-org{
+    color:var(--accent);
+    font-family:var(--mono);
+    font-size:0.78rem;
+    white-space:nowrap;
+  }
+
+  @media (max-width:900px){
+    .about-grid{ grid-template-columns:1fr; gap:40px; }
+  }
+
+  /* ===== SKILLS ===== */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .skill-block{
+    background:var(--bg-soft);
+    padding:32px;
+    transition:background .25s;
+  }
+  .skill-block:hover{ background:var(--card); }
+  .skill-block h3{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--accent);
+    margin-bottom:18px;
+  }
+  .skill-tags{
+    display:flex; flex-wrap:wrap; gap:8px;
+  }
+  .skill-tags span{
+    font-size:0.82rem;
+    color:var(--text);
+    padding:6px 12px;
+    border:1px solid var(--line);
+    border-radius:100px;
+    background:var(--bg);
+    transition:border-color .2s, color .2s;
+  }
+  .skill-tags span:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+  }
+
+  /* ===== EXPERIENCE ===== */
+  .timeline{
+    display:flex; flex-direction:column;
+  }
+  .exp-item{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:40px;
+    padding:36px 0;
+    border-top:1px solid var(--line);
+  }
+  .exp-item:last-child{ border-bottom:1px solid var(--line); }
+  .exp-date{
+    font-family:var(--mono);
+    font-size:0.85rem;
+    color:var(--muted);
+    padding-top:4px;
+  }
+  .exp-role{
+    font-family:var(--serif);
+    font-size:1.4rem;
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  .exp-org{
+    color:var(--accent);
+    font-size:0.92rem;
+    margin-bottom:16px;
+  }
+  .exp-item ul{
+    list-style:none;
+    color:var(--muted);
+    font-size:0.95rem;
+  }
+  .exp-item li{
+    margin-bottom:8px;
+    padding-left:18px;
+    position:relative;
+  }
+  .exp-item li::before{
+    content:'▸';
+    position:absolute; left:0;
+    color:var(--accent);
+  }
+  .exp-tech{
+    margin-top:16px;
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--muted);
+  }
+  .exp-tech span{ color:var(--accent); }
+
+  @media (max-width:860px){
+    .exp-item{ grid-template-columns:1fr; gap:8px; }
+  }
+
+  /* ===== PROJECTS ===== */
+  .projects-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
+    gap:24px;
+  }
+  .project-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:32px;
+    display:flex; flex-direction:column;
+    transition:transform .25s, border-color .25s;
+    position:relative;
+    overflow:hidden;
+  }
+  .project-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--accent);
+  }
+  .project-card .pcard-head{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    margin-bottom:14px;
+  }
+  .project-card h3{
+    font-family:var(--serif);
+    font-size:1.3rem;
+    font-weight:600;
+    max-width:80%;
+  }
+  .project-card .gh-icon{
+    color:var(--muted);
+    transition:color .2s, transform .2s;
+    flex-shrink:0;
+  }
+  .project-card:hover .gh-icon{ color:var(--accent); transform:translate(3px,-3px); }
+
+  .project-card p{
+    color:var(--muted);
+    font-size:0.92rem;
+    margin-bottom:20px;
+    flex-grow:1;
+  }
+  .project-stats{
+    display:flex; gap:10px; flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .project-stats span{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:5px 12px;
+    border-radius:100px;
+  }
+  .project-tags{
+    display:flex; flex-wrap:wrap; gap:8px;
+  }
+  .project-tags span{
+    font-size:0.75rem;
+    color:var(--muted);
+    border:1px solid var(--line);
+    padding:4px 10px;
+    border-radius:100px;
+    font-family:var(--mono);
+  }
+
+  /* ===== POSTCARD ===== */
+  .postcard-section{
+    text-align:center;
+  }
+  .postcard-eyebrow{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--accent);
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:flex; align-items:center; justify-content:center; gap:14px;
+  }
+  .postcard-eyebrow::before, .postcard-eyebrow::after{
+    content:'';
+    height:1px; width:48px;
+    background:var(--line);
+  }
+  .postcard-title{
+    font-family:var(--serif);
+    font-size:clamp(1.9rem, 4.5vw, 3rem);
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin-bottom:14px;
+  }
+  .postcard-title em{ font-style:italic; color:var(--accent); font-weight:400; }
+  .postcard-lead{
+    color:var(--muted);
+    margin-bottom:48px;
+  }
+
+  .postcard{
+    max-width:640px;
+    margin:0 auto;
+    background:#16191e;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:40px;
+    text-align:left;
+    position:relative;
+    box-shadow:0 30px 70px -30px rgba(0,0,0,0.7);
+    transform:rotate(-0.6deg);
+  }
+  .postcard::before{
+    content:'';
+    position:absolute;
+    top:-12px; right:50px;
+    width:64px; height:26px;
+    background:rgba(125,211,192,0.3);
+    transform:rotate(3deg);
+    border-radius:2px;
+  }
+  .postcard-row{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    border-bottom:1px solid var(--line);
+    padding-bottom:18px; margin-bottom:24px;
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--muted);
+  }
+  .postcard-stamp{
+    font-family:var(--mono);
+    font-size:0.7rem;
+    color:var(--accent);
+    border:1px solid var(--accent-soft);
+    background:var(--accent-soft);
+    padding:8px 12px;
+    border-radius:4px;
+    text-align:center;
+    line-height:1.4;
+  }
+  .postcard-heading{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1.7rem;
+    font-weight:400;
+    color:var(--accent);
+    margin-bottom:4px;
+  }
+  .postcard-from{
+    font-family:var(--serif);
+    font-size:1.2rem;
+    color:var(--text);
+    margin-bottom:24px;
+    font-style:italic;
+  }
+  .postcard-note{
+    font-family:var(--sans);
+    font-size:1.05rem;
+    line-height:1.9;
+    color:var(--muted);
+  }
+  .postcard-footer{
+    margin-top:40px;
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--muted);
+    letter-spacing:0.05em;
+  }
+
+  @media (max-width:640px){
+    .postcard{ padding:28px; transform:none; }
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-wrap{
+    text-align:center;
+  }
+  .contact-wrap .section-title{
+    margin:0 auto 24px;
+  }
+  .contact-sub{
+    color:var(--muted);
+    max-width:50ch;
+    margin:0 auto 56px;
+    font-size:1.05rem;
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:16px;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .contact-card{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:28px 20px;
+    transition:border-color .25s, transform .25s;
+    background:var(--card);
+  }
+  .contact-card:hover{
+    border-color:var(--accent);
+    transform:translateY(-4px);
+  }
+  .contact-card .c-label{
+    font-family:var(--mono);
+    font-size:0.75rem;
+    color:var(--accent);
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    margin-bottom:10px;
+  }
+  .contact-card .c-value{
+    font-size:0.95rem;
+    word-break:break-word;
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    border-top:1px solid var(--line);
+    padding:36px 48px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--muted);
+    max-width:1200px;
+    margin:0 auto;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  footer .dot{ color:var(--accent); }
+
+  /* ===== REVEAL ON SCROLL ===== */
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+
+  /* ===== RESUME MODAL ===== */
+  .modal-overlay{
+    position:fixed; inset:0;
+    background:rgba(11,13,16,0.7);
+    backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center;
+    z-index:1000;
+    opacity:0; visibility:hidden;
+    transition:opacity .25s ease, visibility .25s ease;
+    padding:24px;
+  }
+  .modal-overlay.open{
+    opacity:1; visibility:visible;
+  }
+  .modal-box{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:40px;
+    max-width:440px;
+    width:100%;
+    text-align:center;
+    transform:translateY(16px) scale(0.97);
+    transition:transform .3s ease;
+  }
+  .modal-overlay.open .modal-box{
+    transform:translateY(0) scale(1);
+  }
+  .modal-box h3{
+    font-family:var(--serif);
+    font-size:1.5rem;
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  .modal-box p{
+    color:var(--muted);
+    font-size:0.92rem;
+    margin-bottom:8px;
+  }
+  .modal-box .approval-note{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--accent);
+    margin:18px 0 28px;
+    padding:10px 16px;
+    border:1px solid var(--accent-soft);
+    background:var(--accent-soft);
+    border-radius:8px;
+    display:inline-block;
+  }
+  .modal-actions{
+    display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+  }
+  .modal-actions .btn{
+    flex:1;
+    justify-content:center;
+    min-width:140px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+    .reveal{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="logo">Merin Anna Philip<span class="dot">.</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="availability">
+    <span class="pulse"></span>
+    <span class="label">Available for full-time roles · 2026</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-eyebrow">AI Engineer · Agentic AI · LLM Systems · RAG Pipelines</div>
+      <h1>Hi, I'm <span class="hero-name">Merin.<br>
+      </span> I build <em>intelligent systems</em> that reason, retrieve, and act.</h1>
+      <p class="hero-sub">
+        AI Engineer designing and developing LLM powered applications, agentic workflows, and
+        RAG pipelines focused on systems that can reason, retrieve information, interact
+        with tools, and automate complex real world tasks.
+      </p>
+      <p class="hero-meta">
+        B.Tech AI &amp; Data Science · Dhanalakshmi College of Engineering · 2022&ndash;2026
+        <span class="sep">/</span> Chennai, India
+        <span class="sep">/</span> Open to AI Engineer · Agentic AI · LLM Engineer roles
+      </p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" onclick="openResumeModal()">Request My Resume</button>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <span class="hand-tag tag-1">LLMs &amp; RAG</span>
+      <span class="hand-tag tag-2">LangGraph</span>
+      <span class="hand-tag tag-3">Agentic AI</span>
+      <span class="hand-tag tag-4">MCP Protocol</span>
+      <span class="hand-tag tag-5">Prompt Eng.</span>
+      <span class="hand-tag tag-6">FastAPI</span>
+
+      <div>
+        <div class="avatar-frame">
+          <div class="avatar-inner">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQF-EKr-IaG3AA/profile-displayphoto-crop_800_800/B56Z6DYqObKMAM-/0/1780320741912?e=1782950400&v=beta&t=14h7Lmxnp8BtlEMeoYKdyat64EcrKJ_s8ijqpxAHbZc" alt="Merin Anna Philip" style="width:100%; height:100%; object-fit:cover;">
+          </div>
+        </div>
+        <div class="avatar-caption">Merin Anna Philip · AI Engineer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-eyebrow">About</div>
+  <h2 class="section-title reveal">The engineer behind <em>the pipelines.</em></h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        I'm an <strong>AI Engineer</strong> focused on building intelligent applications powered by
+        <strong>Large Language Models, Agentic AI, and Retrieval Augmented Generation</strong>.
+        I design and develop AI systems that can reason, retrieve information, interact with tools,
+        and automate complex workflows &mdash; combining LLMs with modern AI engineering practices
+        to create practical, production-oriented solutions.
+      </p>
+      <p>
+        My key areas include <strong>Agentic AI Systems, RAG Pipelines, Prompt Engineering,
+        LangChain &amp; LangGraph, Model Context Protocol (MCP), and Multi-Agent Workflows</strong>.
+        Through internships at RETECH Solutions, NoviTech R&amp;D, and CodeAlpha, I've gained
+        hands on experience building AI-powered applications, data driven solutions, and
+        machine learning systems.
+      </p>
+      <p>
+        Currently exploring advanced agentic AI architectures, autonomous workflows, multi-agent
+        systems, and production grade AI engineering practices. Open to roles as an AI Engineer,
+        Agentic AI Engineer, Generative AI Engineer, LLM Engineer, & Data Analyst.
+      </p>
+    </div>
+    <div class="reveal">
+      <div class="edu-card">
+        <div class="degree">B.Tech, Artificial Intelligence &amp; Data Science</div>
+        <div class="school">Dhanalakshmi College of Engineering</div>
+        <div class="meta"><span>2022 &ndash; 2026</span><span>Chennai, India</span></div>
+      </div>
+      <div class="cert-list">
+        <div class="cert-item"><span class="cert-org">Accenture</span> Data Analytics &amp; Visualization Job Simulation</div>
+        <div class="cert-item"><span class="cert-org">TCS iON</span> Master Data Management for Beginners</div>
+        <div class="cert-item"><span class="cert-org">Microsoft</span> RAG-based Solutions with Microsoft Foundry</div>
+        <div class="cert-item"><span class="cert-org">AWS</span> Generative AI with Diffusion Models</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-eyebrow">Skills</div>
+  <h2 class="section-title reveal">What I work <em>with.</em></h2>
+  <div class="skills-grid reveal">
+    <div class="skill-block">
+      <h3>Languages &amp; Core</h3>
+      <div class="skill-tags">
+        <span>Python</span><span>SQL</span><span>Pandas</span><span>NumPy</span><span>scikit-learn</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Agentic AI &amp; LLMs</h3>
+      <div class="skill-tags">
+        <span>Agentic AI</span><span>LLMs</span><span>LangChain</span><span>LangGraph</span>
+        <span>Multi-Agent Workflows</span><span>Model Context Protocol (MCP)</span>
+        <span>Prompt Engineering</span><span>RAG Pipelines</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>NLP &amp; AI</h3>
+      <div class="skill-tags">
+        <span>Semantic Search</span><span>Sentiment Analysis</span><span>Conversational AI</span>
+        <span>Embedding Models</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Frameworks &amp; APIs</h3>
+      <div class="skill-tags">
+        <span>FastAPI</span><span>REST APIs</span><span>asyncio</span><span>API Integration</span><span>Streamlit</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Vector Databases</h3>
+      <div class="skill-tags">
+        <span>ChromaDB</span><span>FAISS</span><span>Pinecone</span><span>Vector Search</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Visualization &amp; BI</h3>
+      <div class="skill-tags">
+        <span>Power BI</span><span>Tableau</span><span>Plotly</span><span>Matplotlib</span><span>Excel</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>DevOps &amp; Tools</h3>
+      <div class="skill-tags">
+        <span>Git</span><span>Docker</span><span>Jupyter</span><span>CI/CD Concepts</span><span>Model Monitoring</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-eyebrow">Experience</div>
+  <h2 class="section-title reveal">Where I've <em>worked.</em></h2>
+  <div class="timeline">
+
+    <div class="exp-item reveal">
+      <div class="exp-date">Aug &ndash; Sep 2025</div>
+      <div>
+        <div class="exp-role">Data Analyst Intern</div>
+        <div class="exp-org">CodeAlpha  </div>
+        <ul>
+          <li>Developed interactive dashboards using Power BI to analyse monthly sales performance and regional growth trends, enabling data-driven business decisions.</li>
+          <li>Implemented Python web scraping scripts to automate data collection and structure extraction, reducing manual effort significantly.</li>
+          <li>Cleaned and transformed raw datasets using SQL and Python to improve data quality and usability for downstream analytics.</li>
+        </ul>
+        <div class="exp-tech">Technologies: <span>Python, Power BI, SQL, Web Scraping</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-date">Jun &ndash; Jul 2025</div>
+      <div>
+        <div class="exp-role">Artificial Intelligence Intern</div>
+        <div class="exp-org">NoviTech R&amp;D Pvt Ltd · Chennai </div>
+        <ul>
+          <li>Designed and developed AI-driven solutions using machine learning techniques and Python for real-world datasets.</li>
+          <li>Performed data preprocessing, feature engineering, and model tuning to improve model performance and accuracy.</li>
+          <li>Built and evaluated classification and predictive models, contributing to scalable and efficient intelligent systems.</li>
+        </ul>
+        <div class="exp-tech">Technologies: <span>Python, Machine Learning, scikit-learn, Feature Engineering</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-date">Jun &ndash; Jul 2025</div>
+      <div>
+        <div class="exp-role">Data Analyst Intern</div>
+        <div class="exp-org">NoviTech R&amp;D Pvt Ltd · Chennai </div>
+        <ul>
+          <li>Conducted exploratory data analysis on customer datasets using Python (Pandas, NumPy, Matplotlib), identifying key trends and patterns.</li>
+          <li>Designed SQL pipelines to extract and aggregate customer behaviour data, feeding interactive Tableau dashboards for segmentation and retention analysis.</li>
+          <li>Performed NLP-based sentiment analysis on product reviews, uncovering critical customer satisfaction drivers that informed product roadmap decisions.</li>
+        </ul>
+        <div class="exp-tech">Technologies: <span>Python, SQL, Tableau, NLP, Sentiment Analysis</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-date">Aug 2024</div>
+      <div>
+        <div class="exp-role">Machine Learning &amp; Python Intern</div>
+        <div class="exp-org">RETECH Solutions Pvt Ltd · Chennai</div>
+        <ul>
+          <li>Built predictive machine learning models using scikit-learn (Random Forest, XGBoost, Logistic Regression), achieving strong accuracy on held-out test sets.</li>
+          <li>Applied feature engineering, data preprocessing, and model evaluation using accuracy, precision, and recall metrics.</li>
+          <li>Collaborated with the team to test models for real-world deployment scenarios, contributing to end-to-end ML pipelines.</li>
+        </ul>
+        <div class="exp-tech">Technologies: <span>Python, scikit-learn, Pandas, NumPy, Machine Learning</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-eyebrow">Projects</div>
+  <h2 class="section-title reveal">Things I've <em>built.</em></h2>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="pcard-head">
+        <h3>Multi-Agent Research Assistant</h3>
+        <a href="https://github.com/Merinphilip757/multi-agent-research-assistant" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg class="gh-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+      <p>
+        A LangGraph-powered 4-agent pipeline (Planner → Researcher → Critic → Final Writer)
+        that decomposes any research topic into structured plans, gathers deep research,
+        critiques gaps, and synthesises a polished final report &mdash; served on a Streamlit dashboard
+        with downloadable TXT and Markdown export.
+      </p>
+      <div class="project-stats">
+        <span>4 specialist agents</span>
+        <span>LangGraph StateGraph</span>
+        <span>Groq · LLaMA-3.1</span>
+      </div>
+      <div class="project-tags">
+        <span>Python</span><span>LangGraph</span><span>LangChain</span><span>Groq</span><span>Streamlit</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="pcard-head">
+        <h3>EstateIQ — AI Real Estate Agent</h3>
+        <a href="https://github.com/Merinphilip757/estateiq-ai-real-estate-agent" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg class="gh-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+      <p>
+        A 6-agent LangGraph pipeline delivering 360° real estate intelligence &mdash; Market Analyst,
+        Property Scout, Financial Advisor, Legal Advisor (RERA-aware), Negotiation Coach, and
+        Report Compiler &mdash; all served on a professional dark Streamlit dashboard with live
+        agent status cards and full dossier download.
+      </p>
+      <div class="project-stats">
+        <span>6 specialist agents</span>
+        <span>360° analysis</span>
+        <span>India-tuned ₹ + RERA</span>
+      </div>
+      <div class="project-tags">
+        <span>Python</span><span>LangGraph</span><span>Groq</span><span>Streamlit</span><span>TypedDict State</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="pcard-head">
+        <h3>StockSense AI — Market Dashboard</h3>
+        <a href="https://github.com/Merinphilip757/StockSense-AI" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg class="gh-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+      <p>
+        A real-time Indian stock market intelligence dashboard with live NSE/BSE prices,
+        candlestick and line charts with SMA/EMA overlays, BUY/SELL signal logic,
+        ML-powered next-day price prediction (Linear Regression), and a normalised
+        multi-stock comparison view.
+      </p>
+      <div class="project-stats">
+        <span>Live NSE/BSE data</span>
+        <span>ML price forecast</span>
+        <span>BUY/SELL signals</span>
+      </div>
+      <div class="project-tags">
+        <span>Python</span><span>Streamlit</span><span>Plotly</span><span>yfinance</span><span>scikit-learn</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="pcard-head">
+        <h3>Business Sales &amp; Profit Dashboard</h3>
+        <a href="https://github.com/Merinphilip757/business-sales-profit-dashboard" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg class="gh-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+      <p>
+        An interactive Excel dashboard analysing 8,314 sales transactions across 4 years
+        (2021–2024) covering $1.93M in revenue across 49 US states. Features KPI summary,
+        monthly trend charts, category &amp; sub-category profit breakdown, state-wise distribution,
+        and dynamic slicers for Year, Month, Category, and State filtering.
+      </p>
+      <div class="project-stats">
+        <span>8,314 transactions</span>
+        <span>$1.93M revenue</span>
+        <span>49 US states</span>
+      </div>
+      <div class="project-tags">
+        <span>Excel</span><span>Pivot Tables</span><span>Power Query</span><span>Data Visualization</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- POSTCARD -->
+<section class="postcard-section">
+  <div class="postcard-eyebrow">A note from me</div>
+  <h2 class="postcard-title">Thanks for scrolling all the way <em>to the end.</em></h2>
+  <p class="postcard-lead">Here's a little postcard from me to you.</p>
+
+  <div class="postcard reveal">
+    <div class="postcard-row">
+      <span>2026</span>
+      <div class="postcard-stamp">DCE<br>Chennai</div>
+    </div>
+    <div class="postcard-heading">Postcard</div>
+    <div class="postcard-from">From, Merin 🤖</div>
+    <p class="postcard-note">
+      I started this journey curious about how machines understand language, and somewhere
+      between debugging a RAG pipeline at 2am and watching a hallucination score finally drop,
+      I realised this is what I want to keep doing. Every internship, every late-night build,
+      every model that didn't work until it suddenly did &mdash; it all led here. This is just
+      the beginning. ✨
+    </p>
+  </div>
+
+  <p class="postcard-footer">save this · share it · let's build something together</p>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="section-eyebrow">Contact</div>
+    <h2 class="section-title reveal">Let's <em>connect.</em></h2>
+    <p class="contact-sub reveal">
+      I'm actively looking for full-time AI Engineer, Agentic AI Engineer, and Data Analyst roles.
+      If you have an opportunity or just want to chat about LLMs, RAG, or agentic systems, I'd love to hear from you.
+    </p>
+    <div class="contact-grid reveal">
+      <a href="mailto:merinphilip7575@gmail.com" class="contact-card">
+        <div class="c-label">Email</div>
+        <div class="c-value">merinphilip7575@gmail.com</div>
+      </a>
+      <a href="https://www.linkedin.com/in/merinannaphilip75" target="_blank" rel="noopener" class="contact-card">
+        <div class="c-label">LinkedIn</div>
+        <div class="c-value">linkedin.com/in/merinannaphilip75</div>
+      </a>
+      <a href="https://github.com/Merinphilip757" target="_blank" rel="noopener" class="contact-card">
+        <div class="c-label">GitHub</div>
+        <div class="c-value">github.com/Merinphilip757</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME MODAL -->
+<div class="modal-overlay" id="resumeModal" onclick="if(event.target===this) closeResumeModal()">
+  <div class="modal-box">
+    <h3>Request My Resume</h3>
+    <p>To protect my contact information, I keep my resume behind a request wall.</p>
+    <p>Please request access on the following Google Drive page.</p>
+    <div class="approval-note">I typically approve requests within 48 hours</div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeResumeModal()">Cancel</button>
+      <a href="https://drive.google.com/file/d/1DHDhytfulsAY0sSw_zXfz6LJ601PYRFq/view?usp=sharing" target="_blank" rel="noopener" class="btn btn-primary" onclick="closeResumeModal()">Proceed to Drive</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>Designed &amp; built by Merin Anna Philip <span class="dot">·</span> 2026</div>
+  <div>Chennai, India</div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  function openResumeModal(){
+    document.getElementById('resumeModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeResumeModal(){
+    document.getElementById('resumeModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeResumeModal();
+  });
+</script>
+
+</body>
+</html>
